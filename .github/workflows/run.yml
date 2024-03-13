@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
     timeout-minutes: 60
     steps:
       - name: Checkout codes
@@ -16,15 +19,14 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get install zsh -y
-          
       - name: 初始化Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.8
-          
       - name: 开始
         env:
-            CONFIG: ${{ secrets.CONFIG }}
+          CONFIG: ${{ secrets[matrix.config-name] }} # 使用矩阵策略动态选择 Secret
         run: |
           pip3 install requests pytz
+          echo "$CONFIG" > config.json  # 假设您的脚本是修改过的，能从 config.json 读取配置
           python3 main.py
