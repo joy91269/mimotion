@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:        
-        #config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3]
-        config-name: [CONFIG4, CONFIG5, CONFIG6, CONFIG7] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
+        config-name: [CONFIG, CONFIG1, CONFIG2, CONFIG3]
+        #config-name: [CONFIG4, CONFIG5, CONFIG6, CONFIG7] # 假设你有 CONFIG1 和 CONFIG2 这两个 Secrets
     timeout-minutes: 240
     steps:
       - name: Checkout codes
